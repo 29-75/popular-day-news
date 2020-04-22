@@ -24,6 +24,8 @@
 
 3. virtualenv 구축
 
+        pip3 install virtualenv
+        cd web-crawling (git directory)
         python3 -m virtualenv venv
         source venv/bin/activate
 
