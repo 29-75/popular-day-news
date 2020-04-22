@@ -1,3 +1,4 @@
 flask
-request
+requests
 autopep8
+bs4
