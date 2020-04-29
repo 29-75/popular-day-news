@@ -2,3 +2,4 @@ flask
 requests
 autopep8
 bs4
+pytest
