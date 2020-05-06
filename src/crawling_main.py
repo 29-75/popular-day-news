@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import os
+import hashlib
 
 from item.ranking_item import RankingItem
 
@@ -19,7 +20,8 @@ def convert_to_ranking_item(rankingItemDiv):
   viewDiv = rankingTextDiv.find('div', class_='ranking_view')
 
   item = RankingItem()
-  item.image_link = rankingThumbDiv.a.img.get('src')
+  if rankingThumbDiv is not None:
+    item.image_link = rankingThumbDiv.a.img.get('src')
   item.link = headlineDiv.a.get('href')
   item.headline = headlineDiv.a.get('title')
   item.lede = ledeDiv.text.strip()
@@ -74,8 +76,10 @@ def main():
   # set previous item and set new ranking
   ranking_dict = {}
   for item in ranking_list:
+    hash_id_obj = hashlib.sha256()
+    hash_id_obj.update(item.headline.encode('UTF-8'))
+    id = hash_id_obj.hexdigest()
     # id = hash(item.link)
-    id = hash(item.link)
     item.id = id
     if before_ranking_dict.get(id) is None:
       item.previous_item = None
