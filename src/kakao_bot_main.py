@@ -1,6 +1,30 @@
+from urllib import request
 from flask import Flask, request, jsonify, json
 
 app = Flask(__name__)
+
+
+
+@app.route('/update_news', methods=["GET"])
+def update_news():
+    url = 'http://pf.kakao.com/_AiDaxb'
+    #url = 'http://pf.kakao.com/_AiDaxb/chat'
+    headers = {'Authorization': 'Bearer [YOUR_ACCESS_TOKEN]'}
+
+    # read data.Json file
+    with open('data.json', encoding='UTF8') as json_file:
+        json_data = json.load(json_file)
+
+    # noti to kakao chat-bot
+    # kakaoResponse = requests.post(url, headers=headers, data=json_data)
+
+    #return empty queryString
+    re_msg = {
+        "response": {
+            "result": "sucess",
+            }
+        }
+    return jsonify(re_msg)
 
 @app.route('/list_all', methods=["GET", "POST"])
 def ListAll():
@@ -17,7 +41,6 @@ def ListAll():
             json_data = json.load(json_file)
 
         return jsonify(json_data)
-
 
 @app.route('/top3', methods=["GET"])
 def top3():
