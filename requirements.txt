@@ -3,3 +3,5 @@ requests
 autopep8
 bs4
 pytest
+argparse
+python-crontab
