@@ -3,12 +3,24 @@ import requests
 import json
 import os
 import hashlib
+import textwrap
+import argparse
+import logging
+from crontab import CronTab
 
 from item.ranking_item import RankingItem
 
 BASE_URL = 'https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day'
-DATA_FILE = 'data.json'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_FILE = f'{BASE_DIR}/data.json'
 
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+file_handler = logging.FileHandler(f'{BASE_DIR}/../log/crawling.log', mode='w')
+formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] (%(filename)s:%(lineno)d) > %(message)s')
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
 
 def convert_to_ranking_item(rankingItemDiv):
   rankingThumbDiv = rankingItemDiv.find('div', class_='ranking_thumb')
@@ -29,14 +41,15 @@ def convert_to_ranking_item(rankingItemDiv):
   item.view = int(viewDiv.text.replace(',', ''))
   return item
 
-def get_popular_day_ranking(sectionId=105, num=30, date = None):
+
+def get_popular_day_ranking(sectionId=105, num=30, date=None):
   url = f'{BASE_URL}&sectionId={sectionId}'
   if date:
     url = f'{url}&date={date}'
 
-  # get html 
+  # get html
   response = requests.get(url)
-  print("requests.get(url), url: " + url)
+  logger.info("requests.get(url), url: " + url)
   html = response.text
 
   # parse html & get python object
@@ -44,12 +57,13 @@ def get_popular_day_ranking(sectionId=105, num=30, date = None):
   rankingItems = soup.find_all('li', class_='ranking_item')
 
   # convert to RankingItem
-  rankingItemList  = []
+  rankingItemList = []
   for idx in range(0, num):
     item = convert_to_ranking_item(rankingItems[idx])
     item.rank = idx + 1
     rankingItemList.append(item)
   return rankingItemList
+
 
 def read_json_datafile():
   if os.path.isfile(DATA_FILE):
@@ -69,7 +83,7 @@ def write_json_datafile(ranking_dict):
 def main():
   # get ranking
   ranking_list = get_popular_day_ranking()
-    
+
   # get before ranking from data.json
   before_ranking_dict = read_json_datafile()
 
@@ -84,7 +98,8 @@ def main():
     if before_ranking_dict.get(id) is None:
       item.previous_item = None
     else:
-      item.previous_item = RankingItem.from_dict(before_ranking_dict.get(id))
+      item.previous_item = RankingItem.from_dict(
+        before_ranking_dict.get(id))
       item.previous_item.previous_item = None
       pass
     ranking_dict[id] = item.to_dict()
@@ -92,5 +107,42 @@ def main():
   # write new ranking to data.json
   write_json_datafile(ranking_dict)
 
+  logger.info("RUN Crawling, update crawling data(data.json)")
+
+cron = CronTab(user=True)
+
+def cron_job_start():
+  if cron_job_ls() is True:
+    print("Already running crawling daemon")
+  else:
+    job = cron.new(command=f'{BASE_DIR}/../venv/bin/python {BASE_DIR}/crawling_main.py', comment="crawling-daemon")
+    # job = cron.new(command=f'echo "aaaaaaaa" >> {BASE_DIR}/aaaa', comment="crawling-daemon")
+    job.minute.every(1)
+    cron.write()
+    print("Start crawling daemon")
+    
+def cron_job_stop():
+  cron.remove_all()
+  cron.write()
+  print("Stop crawling daemon")
+
+def cron_job_ls():
+  if len(cron) == 0:
+    return False
+  else:
+    return True
+
 if __name__ == "__main__":
-  main()
+  parser = argparse.ArgumentParser(usage='%(prog)s -c [command]')
+  parser.add_argument('-c', metavar='-c', type=str, nargs='?',
+                      help='command for processing crontab', choices=['start', 'stop', 'status'])
+  args = parser.parse_args()
+
+  if args.c is None:
+    main()
+  elif args.c == 'start':
+    cron_job_start()
+  elif args.c == 'stop':
+    cron_job_stop()
+  else:
+    print(cron_job_ls())
