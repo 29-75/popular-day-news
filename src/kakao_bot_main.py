@@ -5,6 +5,16 @@ app = Flask(__name__)
 
 
 
+@app.route('/list_all', methods=["POST"])
+def ListAll():
+    if request.method == 'POST':
+        # read data.Json file
+        with open('data.json', encoding='UTF8') as json_file:
+            json_data = json.load(json_file)
+            #kakaoResponse = requests.post(url, headers=headers, data=json_data)
+            re_msg={"version":"2.0","template":{"outputs":[{"simpleText":{"text":json_data}}]}}
+    return jsonify(re_msg)
+
 @app.route('/update_news', methods=["GET"])
 def update_news():
     url = 'http://pf.kakao.com/_AiDaxb'
@@ -25,22 +35,6 @@ def update_news():
             }
         }
     return jsonify(re_msg)
-
-@app.route('/list_all', methods=["GET", "POST"])
-def ListAll():
-    if request.method == 'POST':
-        # read data.Json file
-        with open('data.json', encoding='UTF8') as json_file:
-            json_data = json.load(json_file)
-        # restful api call
-        return jsonify(json_data)
-
-    if request.method == 'GET':
-        # read data.Json file
-        with open('data.json', encoding='UTF8') as json_file:
-            json_data = json.load(json_file)
-
-        return jsonify(json_data)
 
 @app.route('/top3', methods=["GET"])
 def top3():
@@ -112,3 +106,4 @@ def method_name():
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
     pass
+
