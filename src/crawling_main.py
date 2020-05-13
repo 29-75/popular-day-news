@@ -14,6 +14,8 @@ BASE_URL = 'https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popul
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = f'{BASE_DIR}/data.json'
 
+if not os.path.exists(f'{BASE_DIR}/../log'):
+  os.makedirs(f'{BASE_DIR}/../log')
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
