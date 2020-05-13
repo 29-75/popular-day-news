@@ -1,10 +1,33 @@
 
 <!-- TOC -->
 
+- [Web crawling Architecture](#web-crawling-architecture)
+  - [How to do web crawling?](#how-to-do-web-crawling)
+  - [Scenario1](#scenario1)
+  - [Scenario2](#scenario2)
 - [1. Python Virtualenv 환경 구축하기](#1-python-virtualenv-%ed%99%98%ea%b2%bd-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0)
   - [virtualenv란!?](#virtualenv%eb%9e%80)
 - [2. web-crawling repository](#2-web-crawling-repository)
 - [3. Unit test](#3-unit-test)
+
+
+# Web crawling Architecture
+![image1](./resources/1.png)
+> 이것은 설명입니다.
+
+## How to do web crawling?
+![image1](./resources/2.png)
+> 이것은 설명입니다.
+
+## Scenario1
+![image1](./resources/3.png)
+> 이것은 설명입니다.
+
+## Scenario2
+![image1](./resources/4.png)
+> 이것은 설명입니다.
+
+---
 
 # 1. Python Virtualenv 환경 구축하기
 ## virtualenv란!?
