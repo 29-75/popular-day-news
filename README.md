@@ -1,36 +1,49 @@
 
 <!-- TOC -->
 
-- [Web crawling Architecture](#web-crawling-architecture)
+- [Web crawling architecture](#web-crawling-architecture)
   - [How to do web crawling?](#how-to-do-web-crawling)
-  - [Scenario1](#scenario1)
-  - [Scenario2](#scenario2)
-- [1. Python Virtualenv 환경 구축하기](#1-python-virtualenv-%ed%99%98%ea%b2%bd-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0)
-  - [virtualenv란!?](#virtualenv%eb%9e%80)
-- [2. web-crawling repository](#2-web-crawling-repository)
-- [3. Unit test](#3-unit-test)
+  - [Scenario1. user request](#Scenario1.-user-request)
+  - [Scenario2. notify event](#scenario2-notify-event)
 
+- [Developer guide](#developer-guide)
+  - [Python Virtualenv 환경 구축하기](#python-virtualenv-%ed%99%98%ea%b2%bd-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0)
+    - [virtualenv란!?](#virtualenv%eb%9e%80)
+  - [web-crawling repository](#web-crawling-repository)
+  - [Unit test](#unit-test)
 
 # Web crawling Architecture
-![image1](./resources/1.png)
-> 이것은 설명입니다.
+![image1](./resources/image1.png)
+
+> naver 뉴스 > 많이 본 뉴스 > IT/과학 뉴스를 crawling 하여 카카오톡 채널을 통해 user에게 제공한다.
 
 ## How to do web crawling?
-![image1](./resources/2.png)
-> 이것은 설명입니다.
+![image2](./resources/image2.png)
+> 1. crawling popular day ranking news of IT/과학 section
+> 2. parse data using `beautifulsoup` and make ranking item
+> 3. store it data.json file
 
-## Scenario1
-![image1](./resources/3.png)
-> 이것은 설명입니다.
+## Scenario1. user request
+![image3](./resources/image3.png)
+> 1. request popular day ranking news from mobile
+> 2. read the data.json file
+> 3. process ranking item
+> 4. response popular day ranking news to user
 
-## Scenario2
-![image1](./resources/4.png)
-> 이것은 설명입니다.
+## Scenario2. notify event
+![image4](./resources/image4.png)
+> 1. notify event to kakao_bot_main periodically
+> 2. read the crawling data
+> 3. process ranking item and distinguish hot topics
+> 4. if hot topic exists, notify event to user
 
----
 
-# 1. Python Virtualenv 환경 구축하기
-## virtualenv란!?
+<br><br>
+
+# Developer guide
+
+## Python Virtualenv 환경 구축하기
+### virtualenv란!?
 > python의 가상환경 virtualenv 모듈의 사용법을 간단하게 정리한다. python의 가상환경이란, 작은 python을 새로 설치해서 내가 원하는 모듈만 운용하는 바구니라고 생각하면 된다. 운영체제 안에서 새로 운영체제를 만들어내는 가상 머신(virtual machine)과 같은 맥락이라고 볼 수 있다. 같은 모듈이라도 이 버젼 저 버젼 다른 버젼이 필요할 때나, python 프로그램을 실행하기 위한 최소한의 환경을 마련하고자 할 때, 그리고 github 등의 저장소와 연계하고자 할 때 등 가상환경은 매우 다양하게 사용될 수 있다. 이젠 필수적인 요소가 된 python 가상 환경의 리눅스/윈도우에서의 사용법을 정리한다.
 
 출처: https://dgkim5360.tistory.com/entry/python-virtualenv-on-linux-ubuntu-and-windows [개발새발로그]
@@ -68,7 +81,7 @@
         curl localhost:8080/route_name
 
 
-# 2. web-crawling repository
+## web-crawling repository
 
          tree
         .
@@ -81,7 +94,7 @@
         ├── test_crawling_main.py  - - - - Crawling 유닛 테스트
         └── test_kakao_bot_main.py - - - - Kakao bot 유닛 테스트
 
-# 3. Unit test
+## Unit test
   - Unit test 코드를 작성해본다.
   - Unit test 코드는 local의 src/ 안에서 `pytest` 명령어를 수행하여 동작 가능하다.
     - 물론 `pytest`도 설치해야 함
