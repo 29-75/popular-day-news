@@ -3,18 +3,6 @@ from flask import Flask, request, jsonify, json
 
 app = Flask(__name__)
 
-
-
-@app.route('/list_all', methods=["POST"])
-def ListAll():
-    if request.method == 'POST':
-        # read data.Json file
-        with open('data.json', encoding='UTF8') as json_file:
-            json_data = json.load(json_file)
-            #kakaoResponse = requests.post(url, headers=headers, data=json_data)
-            re_msg={"version":"2.0","template":{"outputs":[{"simpleText":{"text":json_data}}]}}
-    return jsonify(re_msg)
-
 @app.route('/update_news', methods=["GET"])
 def update_news():
     url = 'http://pf.kakao.com/_AiDaxb'
@@ -29,16 +17,22 @@ def update_news():
     # kakaoResponse = requests.post(url, headers=headers, data=json_data)
 
     #return empty queryString
-    re_msg = {
-        "response": {
-            "result": "sucess",
-            }
-        }
+    re_msg={"version":"2.0","template":{"outputs":[{"simpleText":{"text":json_data}}]}}
     return jsonify(re_msg)
 
-@app.route('/top3', methods=["GET"])
+@app.route('/list_all', methods=["POST"])
+def ListAll():
+    if request.method == 'POST':
+        # read data.Json file
+        with open('data.json', encoding='UTF8') as json_file:
+            json_data = json.load(json_file)
+            #kakaoResponse = requests.post(url, headers=headers, data=json_data)
+            re_msg={"version":"2.0","template":{"outputs":[{"simpleText":{"text":json_data}}]}}
+    return jsonify(re_msg)
+
+@app.route('/top3', methods=["POST"])
 def top3():
-    if request.method == 'GET':
+    if request.method == 'POST':
         msg=[]
         # read data.Json file
         with open('data.json', encoding='UTF8') as json_file:
@@ -47,24 +41,25 @@ def top3():
                 if json_data[context]['rank'] <= 3:
                     print(json_data[context]['headline'])
                     print(json_data[context]['rank'])
-                    re_msg = {
-                        "message": {
-                            "text": "top 3 기사 결과 입니다.",
-                            "HeadLine" : json_data[context]['headline'],
-                            "Rank" : json_data[context]['rank'],
-                            "keyboard": {
-                                "type": "text"
+                    re_msg={"version":"2.0",
+                            "template":
+                                {"outputs":
+                                     {"text": "top 3 기사 결과 입니다.",
+                                      "HeadLine" : json_data[context]['headline'],
+                                      "Rank" : json_data[context]['rank'],
+                                      "keyboard": {"type": "text"}
+                                      }
+                                 }
                             }
-                        }
-                    }
+
                     msg.append(re_msg)
 
         return jsonify(msg)
 
 
-@app.route('/top5', methods=["GET"])
+@app.route('/top5', methods=["POST"])
 def top5():
-    if request.method == 'GET':
+    if request.method == 'POST':
         msg=[]
         # read data.Json file
         with open('data.json', encoding='UTF8') as json_file:
@@ -73,20 +68,19 @@ def top5():
                 if json_data[context]['rank'] <= 5:
                     print(json_data[context]['headline'])
                     print(json_data[context]['rank'])
-                    re_msg = {
-                        "message": {
-                            "text": "top 3 기사 결과 입니다.",
-                            "HeadLine" : json_data[context]['headline'],
-                            "Rank" : json_data[context]['rank'],
-                            "keyboard": {
-                                "type": "text"
+                    re_msg={"version":"2.0",
+                            "template":
+                                {"outputs":
+                                     {"text": "top 3 기사 결과 입니다.",
+                                      "HeadLine" : json_data[context]['headline'],
+                                      "Rank" : json_data[context]['rank'],
+                                      "keyboard": {"type": "text"}
+                                      }
+                                 }
                             }
-                        }
-                    }
                     msg.append(re_msg)
 
         return jsonify(msg)
-
 
 @app.route('/keyboard', methods=["POST"])
 def Keyboard():
