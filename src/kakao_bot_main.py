@@ -235,7 +235,7 @@ def top10():
                 "template": {
                     "outputs": [
                         {
-                            "listCard": [{
+                            "listCard": {
                                 "header": {
                                     "title": "🏆 Top 10 ",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
@@ -248,7 +248,9 @@ def top10():
                                         "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105"
                                     }
                                 ]
-                            }, {
+                            }
+                        },{
+                            "listCard": {
                                 "header": {
                                     "title": "🏆 Top 10 ",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
@@ -261,7 +263,7 @@ def top10():
                                         "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105"
                                     }
                                 ]
-                            }]
+                            }
                         }
                     ]
                 }
