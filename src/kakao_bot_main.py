@@ -105,26 +105,62 @@ def top3():
 
 @app.route('/top5', methods=["POST"])
 def top5():
+    items = []
     if request.method == 'POST':
         msg=[]
+
         # read data.Json file
         with open('data.json', encoding='UTF8') as json_file:
             json_data = json.load(json_file)
             for context in json_data:
                 if json_data[context]['rank'] <= 5:
-                    re_msg={"version":"2.0",
-                            "template":
-                                {"outputs":
-                                     {"text": "top 3 기사 결과 입니다.",
-                                      "HeadLine" : json_data[context]['headline'],
-                                      "Rank" : json_data[context]['rank'],
-                                      "keyboard": {"type": "text"}
-                                      }
-                                 }
-                            }
-                    msg.append(re_msg)
+                    headline = json_data[context]['headline']
+                    view = json_data[context]['view']
+                    link = json_data[context]['image_link']
 
-        return jsonify(msg)
+                    item = {
+                        "type":"",
+                        "title": str(headline),
+                        "description": str(view),
+                        "imageUrl": str(link),
+                        "link": {
+                            "type": "",
+                            "webUrl": str(link),
+                            "moUrl": "",
+                            "pcUrl": "",
+                            "pcCustomScheme": "",
+                            "macCustomScheme": "",
+                            "iosUrl": "",
+                            "iosStoreUrl": "",
+                            "androidUrl": "",
+                            "androidStoreUrl": ""
+                        }
+                    }
+                    items.append(item)
+            response_message={
+                "version": "2.0",
+                "template": {
+                    "outputs": [
+                        {
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items,
+                                "buttons": [
+                                    {
+                                        "label": "구경 가기",
+                                        "action": "webLink",
+                                        "webLinkUrl": "https://www.naver.com"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        return jsonify(response_message)
 
 @app.route('/keyboard', methods=["POST"])
 def Keyboard():
