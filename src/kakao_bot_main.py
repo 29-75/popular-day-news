@@ -69,8 +69,6 @@ def top3():
             json_data = json.load(json_file)
             for context in json_data:
                 if json_data[context]['rank'] <= 3:
-                    print(json_data[context]['headline'])
-                    print(json_data[context]['rank'])
                     re_msg={"version":"2.0",
                             "template":
                                 {"outputs":
@@ -96,8 +94,6 @@ def top5():
             json_data = json.load(json_file)
             for context in json_data:
                 if json_data[context]['rank'] <= 5:
-                    print(json_data[context]['headline'])
-                    print(json_data[context]['rank'])
                     re_msg={"version":"2.0",
                             "template":
                                 {"outputs":
