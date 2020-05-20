@@ -26,7 +26,7 @@ def ListAll():
     if request.method == 'POST':
         # read data.Json file
         with open('data.json', encoding='UTF8') as json_file:
-            json_data = json.load(json_file)
+            json_data = json.load(json_file)ss
             for context in json_data:
 
                 headline = json_data[context]['headline']
