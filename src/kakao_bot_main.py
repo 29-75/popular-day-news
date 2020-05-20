@@ -63,6 +63,13 @@ def ListAll():
                                     "title": "🏆 News LIST All"
                                 },
                                 "items": items,
+                                "buttons": [
+                                    {
+                                        "label": "구경 가기",
+                                        "action": "webLink",
+                                        "webLinkUrl": "https://www.naver.com"
+                                    }
+                                ]
                             }
                         }
                     ]
