@@ -80,31 +80,8 @@ def ListAll():
 
 @app.route('/top3', methods=["POST"])
 def top3():
-    if request.method == 'POST':
-        msg=[]
-        # read data.Json file
-        with open('data.json', encoding='UTF8') as json_file:
-            json_data = json.load(json_file)
-            for context in json_data:
-                if json_data[context]['rank'] <= 3:
-                    re_msg={"version":"2.0",
-                            "template":
-                                {"outputs":
-                                     {"text": "top 3 기사 결과 입니다.",
-                                      "HeadLine" : json_data[context]['headline'],
-                                      "Rank" : json_data[context]['rank'],
-                                      "keyboard": {"type": "text"}
-                                      }
-                                 }
-                            }
-
-                    msg.append(re_msg)
-
-        return jsonify(msg)
-
     items = []
     if request.method == 'POST':
-        msg=[]
         # read data.Json file
         with open('data.json', encoding='UTF8') as json_file:
             json_data = json.load(json_file)
