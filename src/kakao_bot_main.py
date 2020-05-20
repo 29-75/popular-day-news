@@ -60,7 +60,8 @@ def ListAll():
                         {
                             "listCard": {
                                 "header": {
-                                    "title": "🏆 News LIST All"
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
                                 "items": items,
                                 "buttons": [
