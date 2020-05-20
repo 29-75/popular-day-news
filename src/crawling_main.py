@@ -86,10 +86,8 @@ def write_json_datafile(ranking_dict):
 def notify_to_server():
   response = requests.get(UPDATE_NEWS_URL)
   logger.info("requests.get(UPDATE_NEWS_URL), UPDATE_NEWS_URL: " + UPDATE_NEWS_URL)
-  status_code = response.status_code
-  result = response.json()['response']['result']
-  logger.info("UPDATE_NEWS response status code: " + status_code)
-  logger.info("UPDATE_NEWS response result: " + result)
+  # logger.info(f"UPDATE_NEWS response status code: {response.status_code}")
+  # logger.info("UPDATE_NEWS response result: " + response.json())
 
 def main():
   # get ranking
@@ -121,7 +119,7 @@ def main():
   logger.info("RUN Crawling, update crawling data(data.json)")
 
   # notify to server 
-  notify_to_server()
+  # notify_to_server()
 
 cron = CronTab(user=True)
 
