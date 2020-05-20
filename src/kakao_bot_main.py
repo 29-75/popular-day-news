@@ -26,7 +26,7 @@ def ListAll():
     if request.method == 'POST':
         # read data.Json file
         with open('data.json', encoding='UTF8') as json_file:
-            json_data = json.load(json_file)ss
+            json_data = json.load(json_file)
             for context in json_data:
 
                 headline = json_data[context]['headline']
@@ -41,8 +41,8 @@ def ListAll():
                             "link": {
                                 "type": "",
                                 "webUrl": str(link),
-                                "moUrl": "",
-                                "pcUrl": "",
+                                "moUrl": str(link),
+                                "pcUrl": str(link),
                                 "pcCustomScheme": "",
                                 "macCustomScheme": "",
                                 "iosUrl": "",
@@ -99,8 +99,8 @@ def top3():
                         "link": {
                             "type": "",
                             "webUrl": str(link),
-                            "moUrl": "",
-                            "pcUrl": "",
+                            "moUrl": str(link),
+                            "pcUrl": str(link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -157,8 +157,8 @@ def top5():
                         "link": {
                             "type": "",
                             "webUrl": str(link),
-                            "moUrl": "",
-                            "pcUrl": "",
+                            "moUrl": str(link),
+                            "pcUrl": str(link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -215,8 +215,8 @@ def top10():
                         "link": {
                             "type": "",
                             "webUrl": str(link),
-                            "moUrl": "",
-                            "pcUrl": "",
+                            "moUrl": str(link),
+                            "pcUrl": str(link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -241,7 +241,7 @@ def top10():
                                     {
                                         "label": "뉴스보러가기",
                                         "action": "webLink",
-                                        "webLinkUrl": "https://news.naver.com/"
+                                        "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105&date=20200520"
                                     }
                                 ]
                             }
