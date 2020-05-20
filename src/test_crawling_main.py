@@ -33,3 +33,6 @@ class TestCrawling(unittest.TestCase):
 		crawling_main.DATA_FILE = TEST_DATA_FILE
 		crawling_main.main()
 		os.remove(TEST_DATA_FILE)
+
+	def test_notify_to_server(self):
+		crawling_main.notify_to_server()
