@@ -14,6 +14,8 @@ BASE_URL = 'https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popul
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = f'{BASE_DIR}/data.json'
 
+UPDATE_NEWS_URL = 'http://localhost:8080/update_news'
+
 if not os.path.exists(f'{BASE_DIR}/../log'):
   os.makedirs(f'{BASE_DIR}/../log')
 
@@ -81,6 +83,13 @@ def write_json_datafile(ranking_dict):
   with open(DATA_FILE, 'w') as data_file:
     json.dump(ranking_dict, data_file, ensure_ascii=False)
 
+def notify_to_server():
+  response = requests.get(UPDATE_NEWS_URL)
+  logger.info("requests.get(UPDATE_NEWS_URL), UPDATE_NEWS_URL: " + UPDATE_NEWS_URL)
+  status_code = response.status_code
+  result = response.json()['response']['result']
+  logger.info("UPDATE_NEWS response status code: " + status_code)
+  logger.info("UPDATE_NEWS response result: " + result)
 
 def main():
   # get ranking
@@ -110,6 +119,9 @@ def main():
   write_json_datafile(ranking_dict)
 
   logger.info("RUN Crawling, update crawling data(data.json)")
+
+  # notify to server 
+  notify_to_server()
 
 cron = CronTab(user=True)
 
