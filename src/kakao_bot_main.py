@@ -34,11 +34,21 @@ def ListAll():
                 link = json_data[context]['image_link']
 
                 item = {
+                            "type":"",
                             "title": str(headline),
                             "description": str(view),
                             "imageUrl": str(link),
                             "link": {
-                                "web": str(link)
+                                "type": "",
+                                "webUrl": str(link),
+                                "moUrl": "",
+                                "pcUrl": "",
+                                "pcCustomScheme": "",
+                                "macCustomScheme": "",
+                                "iosUrl": "",
+                                "iosStoreUrl": "",
+                                "androidUrl": "",
+                                "androidStoreUrl": ""
                             }
                         }
 
