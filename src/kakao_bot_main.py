@@ -22,13 +22,43 @@ def update_news():
 
 @app.route('/list_all', methods=["POST"])
 def ListAll():
+    items = []
     if request.method == 'POST':
         # read data.Json file
         with open('data.json', encoding='UTF8') as json_file:
             json_data = json.load(json_file)
-            #kakaoResponse = requests.post(url, headers=headers, data=json_data)
-            re_msg={"version":"2.0","template":{"outputs":[{"simpleText":{"text":json_data}}]}}
-    return jsonify(re_msg)
+            for context in json_data:
+
+                headline = json_data[context]['headline']
+                view = json_data[context]['view']
+                link = json_data[context]['image_link']
+
+                item = {
+                            'title': str(headline),
+                            'description': str(view),
+                            'imageUrl': str(link),
+                            'link': {
+                                'web': str(link)
+                            }
+                        }
+
+                items.append(item)
+        response_message={
+                'version': "2.0",
+                'template': {
+                    'outputs': [
+                        {
+                            'listCard': {
+                                'header': {
+                                    'title': '🏆 News LIST All'
+                                },
+                                'items': items,
+                            }
+                        }
+                    ]
+                }
+            }
+        return jsonify(response_message)
 
 @app.route('/top3', methods=["POST"])
 def top3():
