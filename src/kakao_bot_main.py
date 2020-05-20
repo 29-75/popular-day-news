@@ -102,13 +102,67 @@ def top3():
 
         return jsonify(msg)
 
+    items = []
+    if request.method == 'POST':
+        msg=[]
+        # read data.Json file
+        with open('data.json', encoding='UTF8') as json_file:
+            json_data = json.load(json_file)
+            for context in json_data:
+                if json_data[context]['rank'] <= 3:
+                    headline = json_data[context]['headline']
+                    view = json_data[context]['view']
+                    link = json_data[context]['image_link']
+
+                    item = {
+                        "type":"",
+                        "title": str(headline),
+                        "description": str(view),
+                        "imageUrl": str(link),
+                        "link": {
+                            "type": "",
+                            "webUrl": str(link),
+                            "moUrl": "",
+                            "pcUrl": "",
+                            "pcCustomScheme": "",
+                            "macCustomScheme": "",
+                            "iosUrl": "",
+                            "iosStoreUrl": "",
+                            "androidUrl": "",
+                            "androidStoreUrl": ""
+                        }
+                    }
+                    items.append(item)
+            response_message={
+                "version": "2.0",
+                "template": {
+                    "outputs": [
+                        {
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items,
+                                "buttons": [
+                                    {
+                                        "label": "뉴스보러가기",
+                                        "action": "webLink",
+                                        "webLinkUrl": "https://news.naver.com/"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        return jsonify(response_message)
 
 @app.route('/top5', methods=["POST"])
 def top5():
     items = []
     if request.method == 'POST':
         msg=[]
-
         # read data.Json file
         with open('data.json', encoding='UTF8') as json_file:
             json_data = json.load(json_file)
@@ -150,9 +204,67 @@ def top5():
                                 "items": items,
                                 "buttons": [
                                     {
-                                        "label": "구경 가기",
+                                        "label": "뉴스보러가기",
                                         "action": "webLink",
-                                        "webLinkUrl": "https://www.naver.com"
+                                        "webLinkUrl": "https://news.naver.com/"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        return jsonify(response_message)
+
+@app.route('/top10', methods=["POST"])
+def top10():
+    items = []
+    if request.method == 'POST':
+        msg=[]
+        # read data.Json file
+        with open('data.json', encoding='UTF8') as json_file:
+            json_data = json.load(json_file)
+            for context in json_data:
+                if json_data[context]['rank'] <= 10:
+                    headline = json_data[context]['headline']
+                    view = json_data[context]['view']
+                    link = json_data[context]['image_link']
+
+                    item = {
+                        "type":"",
+                        "title": str(headline),
+                        "description": str(view),
+                        "imageUrl": str(link),
+                        "link": {
+                            "type": "",
+                            "webUrl": str(link),
+                            "moUrl": "",
+                            "pcUrl": "",
+                            "pcCustomScheme": "",
+                            "macCustomScheme": "",
+                            "iosUrl": "",
+                            "iosStoreUrl": "",
+                            "androidUrl": "",
+                            "androidStoreUrl": ""
+                        }
+                    }
+                    items.append(item)
+            response_message={
+                "version": "2.0",
+                "template": {
+                    "outputs": [
+                        {
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items,
+                                "buttons": [
+                                    {
+                                        "label": "뉴스보러가기",
+                                        "action": "webLink",
+                                        "webLinkUrl": "https://news.naver.com/"
                                     }
                                 ]
                             }
