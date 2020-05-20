@@ -34,25 +34,25 @@ def ListAll():
                 link = json_data[context]['image_link']
 
                 item = {
-                            'title': str(headline),
-                            'description': str(view),
-                            'imageUrl': str(link),
-                            'link': {
-                                'web': str(link)
+                            "title": str(headline),
+                            "description": str(view),
+                            "imageUrl": str(link),
+                            "link": {
+                                "web": str(link)
                             }
                         }
 
                 items.append(item)
         response_message={
-                'version': "2.0",
-                'template': {
-                    'outputs': [
+                "version": "2.0",
+                "template": {
+                    "outputs": [
                         {
-                            'listCard': {
-                                'header': {
-                                    'title': '🏆 News LIST All'
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All"
                                 },
-                                'items': items,
+                                "items": items,
                             }
                         }
                     ]
