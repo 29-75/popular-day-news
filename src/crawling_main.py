@@ -38,7 +38,7 @@ def convert_to_ranking_item(rankingItemDiv):
   item = RankingItem()
   if rankingThumbDiv is not None:
     item.image_link = rankingThumbDiv.a.img.get('src')
-  item.link = headlineDiv.a.get('href')
+  item.link = 'https://news.naver.com' + headlineDiv.a.get('href')
   item.headline = headlineDiv.a.get('title')
   item.lede = ledeDiv.text.strip()
   item.office = officeDiv.text
