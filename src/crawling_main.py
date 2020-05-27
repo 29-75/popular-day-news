@@ -21,7 +21,7 @@ if not os.path.exists(f'{BASE_DIR}/../log'):
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-file_handler = logging.FileHandler(f'{BASE_DIR}/../log/crawling.log', mode='w')
+file_handler = logging.FileHandler(f'{BASE_DIR}/../log/crawling.log')
 formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] (%(filename)s:%(lineno)d) > %(message)s')
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -141,7 +141,7 @@ def main():
   logger.info("RUN Crawling, update crawling data(data.json)")
 
   # notify to server 
-  notify_to_server()
+  # notify_to_server()
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(usage='%(prog)s -c [command]')
