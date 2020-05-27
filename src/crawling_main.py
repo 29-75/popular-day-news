@@ -25,6 +25,7 @@ file_handler = logging.FileHandler(f'{BASE_DIR}/../log/crawling.log', mode='w')
 formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] (%(filename)s:%(lineno)d) > %(message)s')
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
+cron = CronTab(user=True)
 
 def convert_to_ranking_item(rankingItemDiv):
   rankingThumbDiv = rankingItemDiv.find('div', class_='ranking_thumb')
@@ -45,8 +46,7 @@ def convert_to_ranking_item(rankingItemDiv):
   item.view = int(viewDiv.text.replace(',', ''))
   return item
 
-
-def get_popular_day_ranking(sectionId=105, num=30, date=None):
+def get_crawling_data(sectionId=105, num=30, date=None):
   url = f'{BASE_URL}&sectionId={sectionId}'
   if date:
     url = f'{url}&date={date}'
@@ -68,31 +68,7 @@ def get_popular_day_ranking(sectionId=105, num=30, date=None):
     rankingItemList.append(item)
   return rankingItemList
 
-
-def read_json_datafile():
-  if os.path.isfile(DATA_FILE):
-    with open(DATA_FILE, 'r') as data_file:
-      before_raw_json = data_file.read().encode('utf-8')
-      before_ranking_json = json.loads(before_raw_json)
-    return before_ranking_json
-  else:
-    return {}
-
-
-def write_json_datafile(ranking_dict):
-  with open(DATA_FILE, 'w') as data_file:
-    json.dump(ranking_dict, data_file, ensure_ascii=False)
-
-def notify_to_server():
-  response = requests.get(UPDATE_NEWS_URL)
-  logger.info("requests.get(UPDATE_NEWS_URL), UPDATE_NEWS_URL: " + UPDATE_NEWS_URL)
-  # logger.info(f"UPDATE_NEWS response status code: {response.status_code}")
-  # logger.info("UPDATE_NEWS response result: " + response.json())
-
-def main():
-  # get ranking
-  ranking_list = get_popular_day_ranking()
-
+def process_crawling_data(ranking_list):
   # get before ranking from data.json
   before_ranking_dict = read_json_datafile()
 
@@ -116,19 +92,28 @@ def main():
   # write new ranking to data.json
   write_json_datafile(ranking_dict)
 
-  logger.info("RUN Crawling, update crawling data(data.json)")
+def read_json_datafile():
+  if os.path.isfile(DATA_FILE):
+    with open(DATA_FILE, 'r') as data_file:
+      before_raw_json = data_file.read().encode('utf-8')
+      before_ranking_json = json.loads(before_raw_json)
+    return before_ranking_json
+  else:
+    return {}
 
-  # notify to server 
-  # notify_to_server()
+def write_json_datafile(ranking_dict):
+  with open(DATA_FILE, 'w') as data_file:
+    json.dump(ranking_dict, data_file, ensure_ascii=False)
 
-cron = CronTab(user=True)
+def notify_to_server():
+  response = requests.get(UPDATE_NEWS_URL)
+  logger.info("requests.get(UPDATE_NEWS_URL), UPDATE_NEWS_URL: " + UPDATE_NEWS_URL)
 
 def cron_job_start():
   if cron_job_ls() is True:
     print("Already running crawling daemon")
   else:
     job = cron.new(command=f'{BASE_DIR}/../venv/bin/python {BASE_DIR}/crawling_main.py', comment="crawling-daemon")
-    # job = cron.new(command=f'echo "aaaaaaaa" >> {BASE_DIR}/aaaa', comment="crawling-daemon")
     job.minute.every(1)
     cron.write()
     print("Start crawling daemon")
@@ -143,6 +128,18 @@ def cron_job_ls():
     return False
   else:
     return True
+
+def main():
+  # get ranking data
+  ranking_list = get_crawling_data()
+
+  # process data
+  process_crawling_data(ranking_list)
+
+  logger.info("RUN Crawling, update crawling data(data.json)")
+
+  # notify to server 
+  notify_to_server()
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(usage='%(prog)s -c [command]')
