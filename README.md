@@ -116,5 +116,6 @@
     - [github action 이란?](https://medium.com/@elastic7327/%EA%B9%83%ED%97%88%EB%B8%8C%EC%9D%98-%EC%95%A1%EC%85%98-%EA%B8%B0%EB%8A%A5-git-action-%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EC%9E%90-ed634d622280)
 
 ## Runtime run by using docker
+
         docker build -t my_app_image .
-        docker run -d --name my_app_conatiner my_app_image
+        docker run -d --name my_app_container -p 8080:8080 my_app_image
