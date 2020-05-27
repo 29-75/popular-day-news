@@ -29,7 +29,7 @@ class TestCrawling(unittest.TestCase):
     self.assertIsNotNone(read_dummy)
     self.assertDictEqual(write_dummy, read_dummy)
   
-  def test_process_crawling_data(slef):
+  def test_process_crawling_data(self):
     ranking_list = get_crawling_data()
     process_crawling_data(ranking_list)
 
@@ -50,6 +50,7 @@ class TestCrawling(unittest.TestCase):
     mock_get.return_value.ok = True
     mock_get.return_value.json.return_value = "aaaa".encode('utf-8')
 
-    notify_to_server()
+    response = notify_to_server()
+    self.assertIsNotNone(response)
 
     mock_get_patcher.stop()
