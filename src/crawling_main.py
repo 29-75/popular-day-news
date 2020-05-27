@@ -115,7 +115,7 @@ def cron_job_start():
   if cron_job_ls() is True:
     print("Already running crawling daemon")
   else:
-    job = cron.new(command=f'{BASE_DIR}/../venv/bin/python {BASE_DIR}/crawling_main.py', comment="crawling-daemon")
+    job = cron.new(command=f'python {BASE_DIR}/crawling_main.py', comment="crawling-daemon")
     job.minute.every(1)
     cron.write()
     print("Start crawling daemon")
