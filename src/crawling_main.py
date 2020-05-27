@@ -108,6 +108,8 @@ def write_json_datafile(ranking_dict):
 def notify_to_server():
   response = requests.get(UPDATE_NEWS_URL)
   logger.info("requests.get(UPDATE_NEWS_URL), UPDATE_NEWS_URL: " + UPDATE_NEWS_URL)
+  logger.info(f"UPDATE_NEWS response status code: {response.status_code}")
+  return response
 
 def cron_job_start():
   if cron_job_ls() is True:
