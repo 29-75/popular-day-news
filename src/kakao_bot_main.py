@@ -31,18 +31,19 @@ def ListAll():
 
                 headline = json_data[context]['headline']
                 view = json_data[context]['view']
-                link = json_data[context]['image_link']
+                img_link = json_data[context]['image_link']
+                url_link = json_data[context]['link']
 
                 item = {
                             "type":"",
                             "title": str(headline),
                             "description": str(view),
-                            "imageUrl": str(link),
+                            "imageUrl": str(img_link),
                             "link": {
                                 "type": "",
-                                "webUrl": str(link),
-                                "moUrl": str(link),
-                                "pcUrl": str(link),
+                                "web": str(url_link),
+                                "mobile": str(url_link),
+                                "pc": str(url_link),
                                 "pcCustomScheme": "",
                                 "macCustomScheme": "",
                                 "iosUrl": "",
@@ -63,16 +64,57 @@ def ListAll():
                                     "title": "🏆 News LIST All",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
-                                "items": items,
+                                "items": items[:5]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[5:10]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[10:15]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[15:20]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[20:25]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[25:30],
                                 "buttons": [
                                     {
                                         "label": "구경 가기",
                                         "action": "webLink",
-                                        "webLinkUrl": "https://www.naver.com"
+                                        "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105"
                                     }
                                 ]
                             }
-                        }
+                        },
+
                     ]
                 }
             }
@@ -89,18 +131,19 @@ def top3():
                 if json_data[context]['rank'] <= 3:
                     headline = json_data[context]['headline']
                     view = json_data[context]['view']
-                    link = json_data[context]['image_link']
+                    img_link = json_data[context]['image_link']
+                    url_link = json_data[context]['link']
 
                     item = {
                         "type":"",
                         "title": str(headline),
                         "description": str(view),
-                        "imageUrl": str(link),
+                        "imageUrl": str(img_link),
                         "link": {
                             "type": "",
-                            "webUrl": str(link),
-                            "moUrl": str(link),
-                            "pcUrl": str(link),
+                            "web": str(url_link),
+                            "mobile": str(url_link),
+                            "pc": str(url_link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -117,7 +160,7 @@ def top3():
                         {
                             "listCard": {
                                 "header": {
-                                    "title": "🏆 News LIST All",
+                                    "title": "🏆 Top 3",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
                                 "items": items,
@@ -125,7 +168,7 @@ def top3():
                                     {
                                         "label": "뉴스보러가기",
                                         "action": "webLink",
-                                        "webLinkUrl": "https://news.naver.com/"
+                                        "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105"
                                     }
                                 ]
                             }
@@ -147,18 +190,19 @@ def top5():
                 if json_data[context]['rank'] <= 5:
                     headline = json_data[context]['headline']
                     view = json_data[context]['view']
-                    link = json_data[context]['image_link']
+                    img_link = json_data[context]['image_link']
+                    url_link = json_data[context]['link']
 
                     item = {
                         "type":"",
                         "title": str(headline),
                         "description": str(view),
-                        "imageUrl": str(link),
+                        "imageUrl": str(img_link),
                         "link": {
                             "type": "",
-                            "webUrl": str(link),
-                            "moUrl": str(link),
-                            "pcUrl": str(link),
+                            "web": str(url_link),
+                            "mobile": str(url_link),
+                            "pc": str(url_link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -175,7 +219,7 @@ def top5():
                         {
                             "listCard": {
                                 "header": {
-                                    "title": "🏆 News LIST All",
+                                    "title": "🏆 Top 5 ",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
                                 "items": items,
@@ -183,7 +227,7 @@ def top5():
                                     {
                                         "label": "뉴스보러가기",
                                         "action": "webLink",
-                                        "webLinkUrl": "https://news.naver.com/"
+                                        "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105"
                                     }
                                 ]
                             }
@@ -205,18 +249,19 @@ def top10():
                 if json_data[context]['rank'] <= 10:
                     headline = json_data[context]['headline']
                     view = json_data[context]['view']
-                    link = json_data[context]['image_link']
+                    img_link = json_data[context]['image_link']
+                    url_link = json_data[context]['link']
 
                     item = {
                         "type":"",
                         "title": str(headline),
                         "description": str(view),
-                        "imageUrl": str(link),
+                        "imageUrl": str(img_link),
                         "link": {
                             "type": "",
-                            "webUrl": str(link),
-                            "moUrl": str(link),
-                            "pcUrl": str(link),
+                            "web": str(url_link),
+                            "mobile": str(url_link),
+                            "pc": str(url_link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -233,15 +278,23 @@ def top10():
                         {
                             "listCard": {
                                 "header": {
-                                    "title": "🏆 News LIST All",
+                                    "title": "🏆 Rank 1~5 ",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
-                                "items": items,
+                                "items": items[:5]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 Rank 6~10 ",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[5:10],
                                 "buttons": [
                                     {
                                         "label": "뉴스보러가기",
                                         "action": "webLink",
-                                        "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105&date=20200520"
+                                        "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105"
                                     }
                                 ]
                             }
