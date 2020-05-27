@@ -21,7 +21,7 @@ if not os.path.exists(f'{BASE_DIR}/../log'):
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-file_handler = logging.FileHandler(f'{BASE_DIR}/../log/crawling.log', mode='w')
+file_handler = logging.FileHandler(f'{BASE_DIR}/../log/crawling.log')
 formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] (%(filename)s:%(lineno)d) > %(message)s')
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -115,7 +115,7 @@ def cron_job_start():
   if cron_job_ls() is True:
     print("Already running crawling daemon")
   else:
-    job = cron.new(command=f'{BASE_DIR}/../venv/bin/python {BASE_DIR}/crawling_main.py', comment="crawling-daemon")
+    job = cron.new(command=f'python {BASE_DIR}/crawling_main.py', comment="crawling-daemon")
     job.minute.every(1)
     cron.write()
     print("Start crawling daemon")
@@ -141,7 +141,7 @@ def main():
   logger.info("RUN Crawling, update crawling data(data.json)")
 
   # notify to server 
-  notify_to_server()
+  # notify_to_server()
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(usage='%(prog)s -c [command]')
