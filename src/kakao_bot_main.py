@@ -41,9 +41,9 @@ def ListAll():
                             "imageUrl": str(img_link),
                             "link": {
                                 "type": "",
-                                "webUrl": str(url_link),
-                                "moUrl": str(url_link),
-                                "pcUrl": str(url_link),
+                                "web": str(url_link),
+                                "mobile": str(url_link),
+                                "pc": str(url_link),
                                 "pcCustomScheme": "",
                                 "macCustomScheme": "",
                                 "iosUrl": "",
@@ -64,7 +64,47 @@ def ListAll():
                                     "title": "🏆 News LIST All",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
-                                "items": items,
+                                "items": items[:5]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[5:10]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[10:15]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[15:20]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[20:25]
+                            }
+                        },{
+                            "listCard": {
+                                "header": {
+                                    "title": "🏆 News LIST All",
+                                    "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
+                                },
+                                "items": items[25:30],
                                 "buttons": [
                                     {
                                         "label": "구경 가기",
@@ -73,7 +113,8 @@ def ListAll():
                                     }
                                 ]
                             }
-                        }
+                        },
+
                     ]
                 }
             }
@@ -100,9 +141,9 @@ def top3():
                         "imageUrl": str(img_link),
                         "link": {
                             "type": "",
-                            "webUrl": str(url_link),
-                            "moUrl": str(url_link),
-                            "pcUrl": str(url_link),
+                            "web": str(url_link),
+                            "mobile": str(url_link),
+                            "pc": str(url_link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -159,9 +200,9 @@ def top5():
                         "imageUrl": str(img_link),
                         "link": {
                             "type": "",
-                            "webUrl": str(url_link),
-                            "moUrl": str(url_link),
-                            "pcUrl": str(url_link),
+                            "web": str(url_link),
+                            "mobile": str(url_link),
+                            "pc": str(url_link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -218,9 +259,9 @@ def top10():
                         "imageUrl": str(img_link),
                         "link": {
                             "type": "",
-                            "webUrl": str(url_link),
-                            "moUrl": str(url_link),
-                            "pcUrl": str(url_link),
+                            "web": str(url_link),
+                            "mobile": str(url_link),
+                            "pc": str(url_link),
                             "pcCustomScheme": "",
                             "macCustomScheme": "",
                             "iosUrl": "",
@@ -248,7 +289,7 @@ def top10():
                                     "title": "🏆 Rank 6~10 ",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
-                                "items": items[5:9],
+                                "items": items[5:10],
                                 "buttons": [
                                     {
                                         "label": "뉴스보러가기",
