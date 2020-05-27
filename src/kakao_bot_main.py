@@ -237,22 +237,15 @@ def top10():
                         {
                             "listCard": {
                                 "header": {
-                                    "title": "🏆 Top 10 ",
+                                    "title": "🏆 Rank 1~5 ",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
-                                "items": items[:4],
-                                "buttons": [
-                                    {
-                                        "label": "뉴스보러가기",
-                                        "action": "webLink",
-                                        "webLinkUrl": "https://news.naver.com/main/ranking/popularDay.nhn?rankingType=popular_day&sectionId=105"
-                                    }
-                                ]
+                                "items": items[:5]
                             }
                         },{
                             "listCard": {
                                 "header": {
-                                    "title": "🏆 Top 10 ",
+                                    "title": "🏆 Rank 6~10 ",
                                     "imageUrl": "http://k.kakaocdn.net/dn/xsBdT/btqqIzbK4Hc/F39JI8XNVDMP9jPvoVdxl1/2x1.jpg"
                                 },
                                 "items": items[5:9],
