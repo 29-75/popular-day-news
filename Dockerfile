@@ -10,4 +10,4 @@ RUN apt-get install -y cron
 
 RUN pip install -r requirements.txt
 
-CMD python crawling_main.py -c start; python kakao_bot_main.py
+CMD service cron start ; python crawling_main.py -c start ; python kakao_bot_main.py
