@@ -1,16 +1,27 @@
 
 <!-- TOC -->
 
-- [Web crawling architecture](#web-crawling-architecture)
+- [Web crawling Architecture](#web-crawling-architecture)
   - [How to do web crawling?](#how-to-do-web-crawling)
-  - [Scenario1. user request](#Scenario1.-user-request)
+  - [Scenario1. user request](#scenario1-user-request)
   - [Scenario2. notify event](#scenario2-notify-event)
-
 - [Developer guide](#developer-guide)
-  - [Python Virtualenv 환경 구축하기](#python-virtualenv-%ed%99%98%ea%b2%bd-%ea%b5%ac%ec%b6%95%ed%95%98%ea%b8%b0)
-    - [virtualenv란!?](#virtualenv%eb%9e%80)
+  - [Python Virtualenv 환경 구축하기](#python-virtualenv-환경-구축하기)
+    - [virtualenv란!?](#virtualenv란)
   - [web-crawling repository](#web-crawling-repository)
   - [Unit test](#unit-test)
+  - [Runtime run by using docker](#runtime-run-by-using-docker)
+
+- [Web crawling Architecture](#web-crawling-architecture)
+  - [How to do web crawling?](#how-to-do-web-crawling)
+  - [Scenario1. user request](#scenario1-user-request)
+  - [Scenario2. notify event](#scenario2-notify-event)
+- [Developer guide](#developer-guide)
+  - [Python Virtualenv 환경 구축하기](#python-virtualenv-환경-구축하기)
+    - [virtualenv란!?](#virtualenv란)
+  - [web-crawling repository](#web-crawling-repository)
+  - [Unit test](#unit-test)
+  - [Runtime run by using docker](#runtime-run-by-using-docker)
 
 # Web crawling Architecture
 ![image1](./resources/image1.png)
@@ -103,3 +114,7 @@
   - 기본적인 CI를 위해 Github의 action 기능을 이용하여 commit시에 pytest를 동작 시켜 검증 가능하다.
     - [우리의 github action](https://github.com/29-75/web-crawling/actions)
     - [github action 이란?](https://medium.com/@elastic7327/%EA%B9%83%ED%97%88%EB%B8%8C%EC%9D%98-%EC%95%A1%EC%85%98-%EA%B8%B0%EB%8A%A5-git-action-%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EC%9E%90-ed634d622280)
+
+## Runtime run by using docker
+        docker build -t my_app_image .
+        docker run -d --name my_app_conatiner my_app_image
