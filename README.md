@@ -16,6 +16,7 @@
   - [How to do web crawling?](#how-to-do-web-crawling)
   - [Scenario1. user request](#scenario1-user-request)
   - [Scenario2. notify event](#scenario2-notify-event)
+  - [Example. User Usage](#example-user-usage)
 - [Developer guide](#developer-guide)
   - [Python Virtualenv 환경 구축하기](#python-virtualenv-환경-구축하기)
     - [virtualenv란!?](#virtualenv란)
@@ -47,6 +48,11 @@
 > 2. read the crawling data
 > 3. process ranking item and distinguish hot topics
 > 4. if hot topic exists, notify event to user
+
+## Example. User Usage
+![image5](./resources/image5.png)
+> 1. send keyword to chat bot
+> 2. send response to channel
 
 
 <br><br>
